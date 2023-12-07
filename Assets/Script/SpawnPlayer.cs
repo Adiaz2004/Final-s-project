@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SpawnPlayer : MonoBehaviour
+{
+    public GameObject playerPrefab;
+
+    void Start()
+    {
+        SpawnPlayerAtPoint();
+    }
+
+    void SpawnPlayerAtPoint()
+    {
+        // Retrieve the player's position from PlayerPrefs
+        float spawnX = PlayerPrefs.GetFloat("PlayerSpawnX", 0f);
+        float spawnY = PlayerPrefs.GetFloat("PlayerSpawnY", 0f);
+
+        // Spawn the player at the saved position or at a default spawn point
+        Vector3 spawnPosition = new Vector3(spawnX, spawnY, 0f);
+        GameObject player = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
+
+        // Optionally, set the player's spawn point for future use
+        transform.position = spawnPosition;
+    }
+}
